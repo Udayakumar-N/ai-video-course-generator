@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import Provider from './provider';
+
 import {DM_Sans } from "next/font/google";
 import "./globals.css";
 const AppFont=DM_Sans({subsets: ['latin']})
-
+import {
+  ClerkProvider
+} from '@clerk/nextjs'
 
 export const metadata: Metadata = {
   title: "AI Video Generator App",
@@ -15,11 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
         className={AppFont.className}>
-        {children}
+        <Provider>{children}</Provider>
+        
       </body>
     </html>
+    </ClerkProvider>
   );
 }
